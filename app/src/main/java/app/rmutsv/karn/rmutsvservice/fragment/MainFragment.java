@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import app.rmutsv.karn.rmutsvservice.R;
 
@@ -14,6 +16,28 @@ import app.rmutsv.karn.rmutsvservice.R;
  */
 
 public class MainFragment extends Fragment{
+
+//    Manager Worked affter onCreateView Success
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+//        Register Controller
+        registerController();
+
+
+    }   // Main Method
+
+    private void registerController() {
+        TextView textView = getView().findViewById(R.id.txtRegister);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+    }
 
     @Nullable
     @Override
