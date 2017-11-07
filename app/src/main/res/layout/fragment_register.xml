@@ -49,6 +49,7 @@
 
             <!--TextField-->
             <EditText
+                android:id="@+id/edtName"
                 android:inputType="text"
                 android:hint="@string/name"
                 android:layout_width="match_parent"
@@ -59,6 +60,7 @@
 
         <!--Category-->
         <RadioGroup
+            android:id="@+id/ragCategory"
             android:padding="16dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -66,12 +68,14 @@
 
             <!--Buyer-->
             <RadioButton
+                android:id="@+id/radBuyer"
                 android:text="Buyer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <!--<Saleser-->
             <RadioButton
+                android:id="@+id/radSaleser"
                 android:text="Saleser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -98,6 +102,7 @@
 
             <!--TextField-->
             <EditText
+                android:id="@+id/edtUser"
                 android:inputType="text"
                 android:hint="@string/user"
                 android:layout_width="match_parent"
@@ -121,6 +126,7 @@
 
             <!--TextField-->
             <EditText
+                android:id="@+id/edtPassword"
                 android:inputType="text"
                 android:hint="@string/password"
                 android:layout_width="match_parent"
