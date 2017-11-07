@@ -2,7 +2,7 @@
 <resources>
     <dimen name="margin">40dp</dimen>
     <dimen name="h1">24sp</dimen>
-    <dimen name="h2">16sp</dimen>
+    <dimen name="h2">14sp</dimen>
     <dimen name="logo">120dp</dimen>
 
 
