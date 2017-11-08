@@ -1,5 +1,6 @@
 package app.rmutsv.karn.rmutsvservice.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import app.rmutsv.karn.rmutsvservice.R;
+import app.rmutsv.karn.rmutsvservice.SalerActivity;
 import app.rmutsv.karn.rmutsvservice.utility.GetAllData;
 import app.rmutsv.karn.rmutsvservice.utility.MyAlert;
 import app.rmutsv.karn.rmutsvservice.utility.Myconstant;
@@ -102,6 +104,7 @@ public class MainFragment extends Fragment{
 
             }   // for
 
+
             if (userABoolean) {
                 MyAlert myAlert = new MyAlert(getActivity());
                 myAlert.myDialog("User False",
@@ -110,6 +113,20 @@ public class MainFragment extends Fragment{
 
                 Toast.makeText(getActivity(),"Welcome" + userString1[1],
                         Toast.LENGTH_SHORT).show();
+
+                if (userString1[2].equals("Saler")) {
+                    //Saler
+
+                    Intent intent = new Intent(getActivity(), SalerActivity.class);
+                    intent.putExtra("Login", userString1);
+                    getActivity().startActivity(intent);
+
+
+                } else {
+                    //Buyer
+
+                }
+
             } else {
 
                 MyAlert myAlert = new MyAlert(getActivity());
