@@ -44,6 +44,7 @@
             <!--textfield-->
 
             <EditText
+                android:id="@+id/edtUser"
                 android:textColor="@color/colorPrimaryDark"
                 android:inputType="text"
                 android:hint="@string/user"
@@ -67,8 +68,9 @@
             <!--textfield-->
 
             <EditText
+                android:id="@+id/edtPassword"
                 android:textColor="@color/colorPrimaryDark"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:hint="@string/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -77,6 +79,7 @@
 
         <!--Login Button-->
         <Button
+            android:id="@+id/btnLogin"
             android:text="Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
