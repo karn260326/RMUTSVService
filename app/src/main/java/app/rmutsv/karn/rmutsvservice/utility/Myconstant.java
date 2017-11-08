@@ -6,7 +6,7 @@ package app.rmutsv.karn.rmutsvservice.utility;
 
 public class Myconstant {
 
-    private String urlPostData = "http://androidthai.in.th/rmuts/addDataSaowaluck.php";
+    private String urlPostData = "http://androidthai.in.th/rmuts/addDataMaster.php";
 
     public String getUrlPostData() {
         return urlPostData;

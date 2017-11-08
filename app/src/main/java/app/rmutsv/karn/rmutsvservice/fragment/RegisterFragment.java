@@ -12,19 +12,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
-
 import app.rmutsv.karn.rmutsvservice.MainActivity;
 import app.rmutsv.karn.rmutsvservice.R;
 import app.rmutsv.karn.rmutsvservice.utility.MyAlert;
 import app.rmutsv.karn.rmutsvservice.utility.Myconstant;
 import app.rmutsv.karn.rmutsvservice.utility.UploadNewUser;
 
+
 /**
- * Created by lenovo on 7/11/2560.
+ * Created by masterung on 7/11/2017 AD.
  */
 
 public class RegisterFragment extends Fragment{
- //     Explicit
+
+    //    Explicit
     private String nameString, userString, passwordString, categoryString;
     private boolean aBoolean = true;
 
@@ -49,7 +50,7 @@ public class RegisterFragment extends Fragment{
         RadioGroup radioGroup = getView().findViewById(R.id.ragCategory);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            public void onCheckedChanged(RadioGroup group, int i) {
 
                 aBoolean = false;
 
@@ -70,17 +71,17 @@ public class RegisterFragment extends Fragment{
         ImageView imageView = getView().findViewById(R.id.imvSave);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
 //                Initial View
                 EditText nameEditText = getView().findViewById(R.id.edtName);
                 EditText userEditText = getView().findViewById(R.id.edtUser);
-                EditText passwordText = getView().findViewById(R.id.edtPassword);
+                EditText passwordEditText = getView().findViewById(R.id.edtPassword);
 
 //                Change Data Type
                 nameString = nameEditText.getText().toString().trim();
                 userString = userEditText.getText().toString().trim();
-                passwordString = passwordText.getText().toString().trim();
+                passwordString = passwordEditText.getText().toString().trim();
 
 //                Check Space
                 if (nameString.equals("") || userString.equals("") || passwordString.equals("")) {
@@ -91,8 +92,8 @@ public class RegisterFragment extends Fragment{
                 } else if (aBoolean) {
 //                    Non Choose Choice
                     MyAlert myAlert = new MyAlert(getActivity());
-                    myAlert.myDialog("Non Chose Category", "Please Chose Cateory");
-
+                    myAlert.myDialog("Non Chose Category",
+                            "Please Choose Category");
 
                 } else {
 //                    Choosed Choice
@@ -100,7 +101,8 @@ public class RegisterFragment extends Fragment{
                 }
 
 
-            } // onClick
+
+            }   // onClick
         });
     }
 
@@ -109,17 +111,17 @@ public class RegisterFragment extends Fragment{
         String tag = "8novV1";
         try {
 
-            Myconstant myconstant = new Myconstant();
+            Myconstant myConstant = new Myconstant();
             UploadNewUser uploadNewUser = new UploadNewUser(getActivity());
             uploadNewUser.execute(nameString, categoryString,
-                    userString, passwordString, myconstant.getUrlPostData());
+                    userString, passwordString, myConstant.getUrlPostData());
             String result = uploadNewUser.get();
-            Log.d(tag,"Result" + e.toString())
+            Log.d(tag, "Result ==> " + result);
 
+        } catch (Exception e) {
+            Log.d(tag, "e ==> " + e.toString());
         }
 
-        }catch (Exception e){
-            Log.d(tag, "e ===>" + e.toString());
     }
 
     private void toolbarController() {
@@ -135,8 +137,10 @@ public class RegisterFragment extends Fragment{
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+
                 getActivity().getSupportFragmentManager().popBackStack();
+
             }
         });
 
@@ -146,7 +150,7 @@ public class RegisterFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register, container,false);
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
         return view;
     }
 }   // Main Class
