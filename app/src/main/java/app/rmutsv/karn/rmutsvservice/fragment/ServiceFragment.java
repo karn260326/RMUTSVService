@@ -1,6 +1,8 @@
 package app.rmutsv.karn.rmutsvservice.fragment;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,13 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import app.rmutsv.karn.rmutsvservice.MyServiceActivity;
 import app.rmutsv.karn.rmutsvservice.R;
+import app.rmutsv.karn.rmutsvservice.utility.DeleteData;
 import app.rmutsv.karn.rmutsvservice.utility.GetAllData;
 import app.rmutsv.karn.rmutsvservice.utility.ListViewAdapter;
 import app.rmutsv.karn.rmutsvservice.utility.Myconstant;
@@ -64,7 +69,7 @@ public class ServiceFragment extends Fragment{
 
             JSONArray jsonArray = new JSONArray(resultJSON);
 
-            String[] nameString = new String[jsonArray.length()];
+            final String[] nameString = new String[jsonArray.length()];
             String[] catString = new String[jsonArray.length()];
             String[] userString = new String[jsonArray.length()];
             String[] passwordString = new String[jsonArray.length()];
@@ -84,12 +89,64 @@ public class ServiceFragment extends Fragment{
                     nameString, catString, userString, passwordString);
             listView.setAdapter(listViewAdapter);
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    confirmDialog(nameString[i]);
+                }
+            });
 
         }catch (Exception e) {
             e.printStackTrace();
         }
 
 
+    }
+
+    private void confirmDialog(final String namestring) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(false);
+        builder.setIcon(R.drawable.ic_action_alert);
+        builder.setTitle("You Choose " + namestring);
+        builder.setMessage("What do you want ?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteDataWhere(namestring);
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("Edit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        })
+
+
+        builder.show();
+
+    }
+
+    private void deleteDataWhere(String namestring) {
+        try {
+
+            Myconstant myconstant = new Myconstant();
+            DeleteData deleteData = new DeleteData(getActivity());
+            deleteData.execute(namestring, myconstant.getUrlPostData());
+
+            if (Boolean.parseBoolean(deleteData.get())) {
+                Toast.makeText(getActivity(), "Delete Success", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "delete error", Toast.LENGTH_SHORT).show();
+            }
+
+            createListView();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createToolbar(String strTitle) {
